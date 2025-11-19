@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { apiLogin } from "@/lib/auth/api";
 import { saveToken } from "@/lib/auth/auth";
+import { saveUser } from "@/lib/auth/auth";
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
@@ -16,11 +17,12 @@ export default function LoginPage() {
         setError("");
 
         try {
-        const res = await apiLogin(email, password);
-        saveToken(res.access_token);
-        window.location.href = "/admin"; // redirect setelah login
+            const res = await apiLogin(email, password);
+            saveToken(res.access_token);
+            saveUser(email);
+            window.location.href = "/admin"; // redirect setelah login
         } catch (err) {
-        setError("Email atau password salah");
+            setError("Email atau password salah");
         }
 
         setLoading(false);

@@ -6,9 +6,9 @@ import Navbar from "@/component/Navbar";
 import { useAuth } from "@/lib/hooks/useAuth";
 
 const API = process.env.NEXT_PUBLIC_API_URL;
-const { token } = useAuth();
 
 export default function GamePage() {
+    const { token } = useAuth();
     const [questions, setQuestions] = useState<any[]>([]);
     const [opened, setOpened] = useState<number[]>([]);
     const [showAnswer, setShowAnswer] = useState<number[]>([]);

@@ -61,6 +61,7 @@ export default function AdminQuestionsPage() {
 
         const res = await fetch(`${API}/questions/${id}`, {
             method: "DELETE",
+            headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
 
         if (!res.ok) {
@@ -94,7 +95,11 @@ export default function AdminQuestionsPage() {
                     fd.append("question", data.soal);
                     fd.append("answer", data.jawaban);
                     if (data.gambar) fd.append("file", data.gambar as any);
-                    fetch(`${API}/questions`, { method: "POST", body: fd })
+                    fetch(`${API}/questions`, {
+                        method: "POST",
+                        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+                        body: fd,
+                    })
                         .then(res => res.json())
                         .then(created => setQuestions(prev => [...prev, created]));
                 }} />
@@ -142,6 +147,7 @@ export default function AdminQuestionsPage() {
 
                         await fetch(`${API}/questions/${updated.id}`, {
                             method: "PATCH",
+                            headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
                             body: fd,
                         });
                     } 
@@ -151,7 +157,10 @@ export default function AdminQuestionsPage() {
 
                         await fetch(`${API}/questions/${updated.id}`, {
                             method: "PATCH",
-                            headers: { "Content-Type": "application/json" },
+                            headers: {
+                                "Content-Type": "application/json",
+                                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                            },
                             body: JSON.stringify(payload),
                         });
                     }

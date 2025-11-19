@@ -3,8 +3,10 @@
 import { useState, useEffect } from "react";
 import { Gamepad2 } from "lucide-react";
 import Navbar from "@/component/Navbar";
+import { useAuth } from "@/lib/hooks/useAuth";
 
 const API = process.env.NEXT_PUBLIC_API_URL;
+const { token } = useAuth();
 
 export default function GamePage() {
     const [questions, setQuestions] = useState<any[]>([]);
@@ -13,12 +15,15 @@ export default function GamePage() {
     const [selectedCard, setSelectedCard] = useState<any | null>(null);
 
     useEffect(() => {
-        fetch(`${API}/questions`)
+        if (!token) return;
+
+        fetch(`${API}/questions`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
             .then((res) => res.json())
             .then((data) => {
-                // Some backend responses return an array directly, others wrap the array
-                // in an object like { data: [...] } or { questions: [...] }.
-                // Normalize to always set an array into state.
                 const list = Array.isArray(data)
                     ? data
                     : Array.isArray(data?.data)
@@ -28,7 +33,7 @@ export default function GamePage() {
                     : [];
                 setQuestions(list);
             });
-    }, []);
+    }, [token]);
 
     function flipCard(id: number) {
         if (!opened.includes(id)) {

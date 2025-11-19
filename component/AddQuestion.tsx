@@ -28,7 +28,7 @@ export default function AddQuestion({ onSubmit }: AddQuestionProps) {
             onSubmit={handleSubmit}
             className="bg-white shadow-lg p-6 rounded-xl mb-10 w-full border border-purple-100"
         >
-            <h2 className="text-xl font-bold mb-4 text-purple-700">➕ Tambah Soal Baru</h2>
+            <h2 className="text-xl font-bold mb-4 text-purple-700">➕ Tambah Soal Baruu</h2>
 
             <input
                 type="text"

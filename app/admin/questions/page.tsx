@@ -31,9 +31,24 @@ export default function AdminQuestionsPage() {
     const [editData, setEditData] = useState<any>(null);
 
     async function fetchQuestions() {
-        const res = await fetch(`${API}/questions`);
-        const data = await res.json();
-        setQuestions(data);
+        try {
+            const token = localStorage.getItem("token");
+            const res = await fetch(`${API}/questions`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            const data = await res.json();
+
+            if (Array.isArray(data)) {
+                setQuestions(data);
+            } else {
+                setQuestions([]);
+            }
+        } catch (e) {
+            setQuestions([]);
+        }
     }
 
     useEffect(() => {
@@ -85,23 +100,26 @@ export default function AdminQuestionsPage() {
                 }} />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                    {questions.map((q: any) => (
-                        <QuestionCard
-                            key={q.id}
-                            soal={q.question}
-                            jawaban={q.answer}
-                            gambar={q.imageUrl ? `${API}/uploads/${q.imageUrl}` : undefined}
-                            onEdit={() =>
-                                openEditModal({
-                                    id: q.id,
-                                    soal: q.question,
-                                    jawaban: q.answer,
-                                    gambar: q.imageUrl ? `${API}/uploads/${q.imageUrl}` : ""
-                                })
-                            }
-                            onDelete={() => deleteQuestion(q.id)}
-                        />
-                    ))}
+                    {Array.isArray(questions) &&
+                        questions.map((q: any, idx: number) => (
+                            <div key={`${q?.id ?? 'q'}-${idx}`}>
+                                <QuestionCard
+                                    soal={q.question}
+                                    jawaban={q.answer}
+                                    gambar={q.imageUrl ? `${API}/uploads/${q.imageUrl}` : undefined}
+                                    onEdit={() =>
+                                        openEditModal({
+                                            id: q.id,
+                                            soal: q.question,
+                                            jawaban: q.answer,
+                                            gambar: q.imageUrl ? `${API}/uploads/${q.imageUrl}` : ""
+                                        })
+                                    }
+                                    onDelete={() => deleteQuestion(q.id)}
+                                />
+                            </div>
+                        ))
+                    }
                 </div>
             </div>
 

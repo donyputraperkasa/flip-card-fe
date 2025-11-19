@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 
 export function useAuth() {
     const [token, setToken] = useState<string | null>(null);
+    const [userEmail, setUserEmail] = useState<string | null>(null);
     const router = useRouter();
 
     useEffect(() => {
@@ -15,8 +16,10 @@ export function useAuth() {
         router.push("/login");
         } else {
         setToken(t);
+        const email = localStorage.getItem("user_email");
+        setUserEmail(email);
         }
     }, []);
 
-  return token; // null jika belum siap
+  return { token, userEmail }; // null jika belum siap
 }

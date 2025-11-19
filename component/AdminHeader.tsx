@@ -16,7 +16,7 @@ export default function AdminHeader() {
             </h1>
 
             <Link 
-                href="/"
+                href="/admin"
                 className="px-5 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 shadow"
             >
                 Kembali

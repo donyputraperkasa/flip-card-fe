@@ -7,7 +7,7 @@ import Navbar from "@/component/Navbar";
 const API = process.env.NEXT_PUBLIC_API_URL;
 
 export default function GamePage() {
-    const [questions, setQuestions] = useState([]);
+    const [questions, setQuestions] = useState<any[]>([]);
     const [opened, setOpened] = useState<number[]>([]);
     const [showAnswer, setShowAnswer] = useState<number[]>([]);
     const [selectedCard, setSelectedCard] = useState<any | null>(null);
@@ -15,7 +15,19 @@ export default function GamePage() {
     useEffect(() => {
         fetch(`${API}/questions`)
             .then((res) => res.json())
-            .then((data) => setQuestions(data));
+            .then((data) => {
+                // Some backend responses return an array directly, others wrap the array
+                // in an object like { data: [...] } or { questions: [...] }.
+                // Normalize to always set an array into state.
+                const list = Array.isArray(data)
+                    ? data
+                    : Array.isArray(data?.data)
+                    ? data.data
+                    : Array.isArray(data?.questions)
+                    ? data.questions
+                    : [];
+                setQuestions(list);
+            });
     }, []);
 
     function flipCard(id: number) {
@@ -37,7 +49,7 @@ export default function GamePage() {
             </div>
             <div className="max-w-6xl mx-auto flex justify-end mb-6 mt-12">
                 <a
-                    href="/"
+                    href="/admin"
                     className="px-5 py-2 rounded-lg font-semibold text-white bg-gradient-to-r from-purple-600 to-purple-800 shadow-lg hover:scale-105 transition transform"
                 >
                     ← Kembali ke Home
@@ -47,7 +59,7 @@ export default function GamePage() {
             {/* GRID */}
             <div className="grid lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
 
-                {questions.map((q: any, index: number) => {
+                {(Array.isArray(questions) ? questions : []).map((q: any, index: number) => {
                     const isOpen = opened.includes(q.id);
                     const isAnswerShown = showAnswer.includes(q.id);
 

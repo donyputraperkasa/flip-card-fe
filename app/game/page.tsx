@@ -13,6 +13,7 @@ export default function GamePage() {
     const [opened, setOpened] = useState<number[]>([]);
     const [showAnswer, setShowAnswer] = useState<number[]>([]);
     const [selectedCard, setSelectedCard] = useState<any | null>(null);
+    const [timer, setTimer] = useState(30);
 
     useEffect(() => {
         if (!token) return;
@@ -34,6 +35,23 @@ export default function GamePage() {
                 setQuestions(list);
             });
     }, [token]);
+
+    useEffect(() => {
+        if (!selectedCard) return;
+
+        setTimer(30); 
+        const interval = setInterval(() => {
+            setTimer((prev) => {
+                if (prev <= 1) {
+                    clearInterval(interval);
+                    return 0;
+                }
+                return prev - 1;
+            });
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, [selectedCard]);
 
     function flipCard(id: number) {
         if (!opened.includes(id)) {
@@ -57,7 +75,7 @@ export default function GamePage() {
                     href="/admin"
                     className="px-5 py-2 rounded-lg font-semibold text-white bg-gradient-to-r from-purple-600 to-purple-800 shadow-lg hover:scale-105 transition transform"
                 >
-                    ← Kembali ke Home
+                    ← Kembali
                 </a>
             </div>
 
@@ -141,7 +159,7 @@ export default function GamePage() {
 
 
                                         {isAnswerShown && (
-                                            <p className="mt-5 text-yellow-300 text-2xl font-extrabold break-words">
+                                            <p className="mt-5 text-yellow-300 text-3xl font-extrabold break-words drop-shadow-md tracking-wide">
                                                 Jawaban: {q.answer}
                                             </p>
                                         )}
@@ -168,15 +186,18 @@ export default function GamePage() {
 
             {selectedCard && (
                 <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 p-6"
-                     onClick={() => setSelectedCard(null)}>
+                        onClick={() => setSelectedCard(null)}>
                     
                     <div
                         className="bg-white rounded-2xl w-full max-w-3xl p-6 shadow-xl transform scale-100 transition"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <h2 className="text-3xl font-bold mb-4 text-purple-700">Soal:</h2>
+                        <h2 className="text-4xl font-extrabold mb-4 text-purple-700 flex items-center justify-between w-full">
+                            <span>Soal:</span>
+                            <span className="text-red-600 text-3xl font-bold">{timer}s</span>
+                        </h2>
 
-                        <p className="text-xl whitespace-pre-line mb-4">
+                        <p className="text-2xl whitespace-pre-line mb-4 font-semibold">
                             {selectedCard.question}
                         </p>
 
@@ -199,7 +220,7 @@ export default function GamePage() {
                                 Tampilkan Jawaban
                             </button>
                         ) : (
-                            <p className="text-2xl font-extrabold text-yellow-600 mb-6">
+                            <p className="text-4xl font-black text-yellow-600 mb-6 drop-shadow-lg tracking-wide">
                                 Jawaban: {selectedCard.answer}
                             </p>
                         )}

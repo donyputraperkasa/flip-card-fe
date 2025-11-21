@@ -40,9 +40,15 @@ export default function AdminQuestionsPage() {
             });
 
             const data = await res.json();
+            console.log("Fetched questions:", data);
 
             if (Array.isArray(data)) {
-                setQuestions(data);
+                setQuestions(
+                    data.map((q) => ({
+                        ...q,
+                        duration: Number(q.duration ?? 45)
+                    }))
+                );
             } else {
                 setQuestions([]);
             }
@@ -94,6 +100,7 @@ export default function AdminQuestionsPage() {
                     const fd = new FormData();
                     fd.append("question", data.soal);
                     fd.append("answer", data.jawaban);
+                    fd.append("duration", String(data.duration));
                     if (data.gambar) fd.append("file", data.gambar as any);
                     fetch(`${API}/questions`, {
                         method: "POST",
@@ -101,29 +108,36 @@ export default function AdminQuestionsPage() {
                         body: fd,
                     })
                         .then(res => res.json())
-                        .then(created => setQuestions(prev => [...prev, created]));
+                        .then(created => {
+                            console.log("Created question:", created);
+                            fetchQuestions();
+                        });
                 }} />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                     {Array.isArray(questions) &&
-                        questions.map((q: any, idx: number) => (
-                            <div key={`${q?.id ?? 'q'}-${idx}`}>
-                                <QuestionCard
-                                    soal={q.question}
-                                    jawaban={q.answer}
-                                    gambar={q.imageUrl ? `${API}/uploads/${q.imageUrl}` : undefined}
-                                    onEdit={() =>
-                                        openEditModal({
-                                            id: q.id,
-                                            soal: q.question,
-                                            jawaban: q.answer,
-                                            gambar: q.imageUrl ? `${API}/uploads/${q.imageUrl}` : ""
-                                        })
-                                    }
-                                    onDelete={() => deleteQuestion(q.id)}
-                                />
-                            </div>
-                        ))
+                        questions.map((q: any, idx: number) => {
+                            console.log("Question duration:", q.duration, "for ID:", q.id);
+                            return (
+                                <div key={`${q?.id ?? 'q'}-${idx}`}>
+                                    <QuestionCard
+                                        soal={q.question}
+                                        jawaban={q.answer}
+                                        gambar={q.imageUrl ? `${API}/uploads/${q.imageUrl}` : undefined}
+                                        onEdit={() =>
+                                            openEditModal({
+                                                id: q.id,
+                                                soal: q.question,
+                                                jawaban: q.answer,
+                                                gambar: q.imageUrl ? `${API}/uploads/${q.imageUrl}` : "",
+                                                duration: q.duration
+                                            })
+                                        }
+                                        onDelete={() => deleteQuestion(q.id)}
+                                    />
+                                </div>
+                            );
+                        })
                     }
                 </div>
             </div>
@@ -136,6 +150,7 @@ export default function AdminQuestionsPage() {
                     const payload: any = {
                         question: updated.soal,
                         answer: updated.jawaban,
+                        duration: updated.duration,
                     };
 
                     // Jika gambar baru (File) dikirim
@@ -144,6 +159,7 @@ export default function AdminQuestionsPage() {
                         fd.append("question", updated.soal);
                         fd.append("answer", updated.jawaban);
                         fd.append("file", updated.gambar);
+                        fd.append("duration", String(updated.duration));
 
                         await fetch(`${API}/questions/${updated.id}`, {
                             method: "PATCH",
@@ -154,6 +170,8 @@ export default function AdminQuestionsPage() {
                     // Jika tidak ada perubahan gambar → kirim JSON biasa
                     else {
                         payload.imageUrl = updated.gambar?.split("/").pop() || null;
+
+                        console.log("Updated question payload:", payload);
 
                         await fetch(`${API}/questions/${updated.id}`, {
                             method: "PATCH",

@@ -12,7 +12,7 @@ export default function Home() {
 
       <div className="flex flex-col items-center mb-10">
         <h1 className="text-4xl font-extrabold text-blue-600 drop-shadow-2xl mb-4 tracking-wide">
-          BELAJAR BERSAMA SMP BOPKRI WATES
+          MEDIA BELAJAR INTERAKTIF
         </h1>
 
         <Sparkles className="w-12 h-12 text-white drop-shadow-xl mb-3" />

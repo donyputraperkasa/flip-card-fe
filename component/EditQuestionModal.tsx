@@ -9,6 +9,7 @@ interface EditQuestionModalProps {
         soal: string;
         jawaban: string;
         gambar?: File | string | null;
+        duration: number;
     } | null;
     onClose: () => void;
     onSave: (updated: {
@@ -16,6 +17,7 @@ interface EditQuestionModalProps {
         soal: string;
         jawaban: string;
         gambar?: File | string | null;
+        duration: number;
     }) => void;
 }
 
@@ -29,12 +31,14 @@ export default function EditQuestionModal({
     const [soal, setSoal] = useState("");
     const [jawaban, setJawaban] = useState("");
     const [gambar, setGambar] = useState<File | string | null>(null);
+    const [duration, setDuration] = useState<number>(45);
 
     useEffect(() => {
         if (data) {
             setSoal(data.soal);
             setJawaban(data.jawaban);
             setGambar(data.gambar || "");
+            setDuration(data.duration ?? 45);
         }
     }, [data]);
 
@@ -45,7 +49,8 @@ export default function EditQuestionModal({
             id: data.id,
             soal,
             jawaban,
-            gambar: gambar || ""
+            gambar: gambar || "",
+            duration: duration,
         });
     };
 
@@ -81,6 +86,16 @@ export default function EditQuestionModal({
                     accept="image/*"
                     onChange={(e) => setGambar(e.target.files?.[0] || null)}
                     className="border border-purple-300 p-3 w-full mb-4 rounded-lg focus:ring-2 focus:ring-purple-400 outline-none transition"
+                />
+
+                {/* INPUT DURASI */}
+                <input
+                    type="number"
+                    value={duration}
+                    onChange={(e) => setDuration(Number(e.target.value))}
+                    placeholder="Durasi (detik)"
+                    className="border border-purple-300 p-3 w-full mb-4 rounded-lg 
+                        focus:ring-2 focus:ring-purple-400 outline-none transition"
                 />
 
                 <div className="flex justify-end gap-3 mt-4">

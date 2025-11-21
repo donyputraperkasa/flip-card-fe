@@ -15,7 +15,8 @@ export default function Footer() {
 
             {/* Center */}
             <div className="text-sm opacity-80 mt-3 sm:mt-0">
-            Dibuat dengan <Heart className="inline w-4 h-4 text-pink-300" /> oleh mas dony putra perkasa
+                created by : 
+                <span className="font-semibold"> mas-dony</span>
             </div>
 
             {/* Right Side */}

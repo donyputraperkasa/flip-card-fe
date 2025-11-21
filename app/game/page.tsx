@@ -13,33 +13,40 @@ export default function GamePage() {
     const [opened, setOpened] = useState<number[]>([]);
     const [showAnswer, setShowAnswer] = useState<number[]>([]);
     const [selectedCard, setSelectedCard] = useState<any | null>(null);
-    const [timer, setTimer] = useState(30);
+    const [timer, setTimer] = useState(40);
 
-    useEffect(() => {
-        if (!token) return;
+useEffect(() => {
+    if (!token) return;
 
-        fetch(`${API}/questions`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                const list = Array.isArray(data)
-                    ? data
-                    : Array.isArray(data?.data)
-                    ? data.data
-                    : Array.isArray(data?.questions)
-                    ? data.questions
-                    : [];
-                setQuestions(list);
-            });
-    }, [token]);
+    fetch(`${API}/questions`, {
+        headers: { Authorization: `Bearer ${token}` },
+    })
+        .then((res) => res.json())
+        .then((data) => {
+            const list = Array.isArray(data)
+                ? data
+                : Array.isArray(data?.data)
+                ? data.data
+                : [];
+
+            setQuestions(
+                list.map((q: any) => {
+                    console.log("duration dari BE:", q.duration);
+                    return {
+                        ...q,
+                        // duration: Number(q.duration ?? 50) //sepertinya disini dehh <---
+                        duration: Number(q.duration ?? 45),
+                    };
+                })
+            );
+        });
+}, [token]);
 
     useEffect(() => {
         if (!selectedCard) return;
+        
+        setTimer(selectedCard.duration);
 
-        setTimer(30); 
         const interval = setInterval(() => {
             setTimer((prev) => {
                 if (prev <= 1) {
@@ -92,7 +99,10 @@ export default function GamePage() {
                             className="w-full h-100 perspective cursor-pointer transition-transform duration-300 hover:scale-105"
                             onClick={() => {
                                 flipCard(q.id);
-                                setSelectedCard(q);
+                                setSelectedCard({
+                                    ...q,
+                                    duration: Number(q.duration),
+                                });
                             }}
                         >
                             <div

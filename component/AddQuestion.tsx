@@ -7,6 +7,7 @@ interface AddQuestionProps {
         soal: string;
         jawaban: string;
         gambar?: File;
+        duration: number;
     }) => void;
 }
 
@@ -14,13 +15,15 @@ export default function AddQuestion({ onSubmit }: AddQuestionProps) {
     const [soal, setSoal] = useState("");
     const [jawaban, setJawaban] = useState("");
     const [gambar, setGambar] = useState<File | null>(null);
+    const [duration, setDuration] = useState<number>(45);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        onSubmit({ soal, jawaban, gambar: gambar || undefined });
+        onSubmit({ soal, jawaban, gambar: gambar || undefined, duration: duration });
         setSoal("");
         setJawaban("");
         setGambar(null);
+        setDuration(45);
     };
 
     return (
@@ -54,6 +57,16 @@ export default function AddQuestion({ onSubmit }: AddQuestionProps) {
                 type="file"
                 accept="image/*"
                 onChange={(e) => setGambar(e.target.files ? e.target.files[0] : null)}
+                className="border border-purple-300 p-3 w-full mb-4 rounded-lg 
+                focus:ring-2 focus:ring-purple-400 outline-none transition"
+            />
+
+            <label className="block mb-1 font-medium text-purple-600">Tentukan Durasi waktu-nya (detik)</label>
+            <input
+                type="number"
+                placeholder="Durasi (detik)"
+                value={duration}
+                onChange={(e) => setDuration(Number(e.target.value))}
                 className="border border-purple-300 p-3 w-full mb-4 rounded-lg 
                 focus:ring-2 focus:ring-purple-400 outline-none transition"
             />

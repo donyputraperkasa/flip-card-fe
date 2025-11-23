@@ -39,7 +39,7 @@ export default function AddQuestion({ onSubmit }: AddQuestionProps) {
                 value={soal}
                 onChange={(e) => setSoal(e.target.value)}
                 className="border border-purple-300 p-3 w-full mb-4 rounded-lg 
-                focus:ring-2 focus:ring-purple-400 outline-none transition"
+                focus:ring-2 focus:ring-purple-400 outline-none transition text-gray-700"
                 required
             />
 
@@ -49,7 +49,7 @@ export default function AddQuestion({ onSubmit }: AddQuestionProps) {
                 value={jawaban}
                 onChange={(e) => setJawaban(e.target.value)}
                 className="border border-purple-300 p-3 w-full mb-4 rounded-lg 
-                focus:ring-2 focus:ring-purple-400 outline-none transition"
+                focus:ring-2 focus:ring-purple-400 outline-none transition text-gray-700"
                 required
             />
 
@@ -68,7 +68,7 @@ export default function AddQuestion({ onSubmit }: AddQuestionProps) {
                 value={duration}
                 onChange={(e) => setDuration(Number(e.target.value))}
                 className="border border-purple-300 p-3 w-full mb-4 rounded-lg 
-                focus:ring-2 focus:ring-purple-400 outline-none transition"
+                focus:ring-2 focus:ring-purple-400 outline-none transition text-gray-700"
             />
 
             <button

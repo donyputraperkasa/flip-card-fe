@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Gamepad2 } from "lucide-react";
 import Navbar from "@/component/Navbar";
 import { useAuth } from "@/lib/hooks/useAuth";
 
@@ -73,21 +72,21 @@ useEffect(() => {
     }
 
     return (
-        <div className="min-h-screen px-6 py-10 pb-32">
+        <div className="min-h-screen px-4 sm:px-6 py-10 pb-32">
             <div className="w-full">
                 <Navbar />
             </div>
-            <div className="max-w-6xl mx-auto flex justify-end mb-6 mt-12">
+            <div className="max-w-6xl mx-auto flex justify-end mb-6 mt-12 px-2">
                 <a
                     href="/admin"
-                    className="px-5 py-2 rounded-lg font-semibold text-white bg-gradient-to-r from-purple-600 to-purple-800 shadow-lg hover:scale-105 transition transform"
+                    className="px-4 sm:px-5 py-2 rounded-lg font-semibold text-white bg-gradient-to-r from-purple-600 to-purple-800 shadow-lg hover:scale-105 transition transform text-sm sm:text-base"
                 >
                     ← Kembali
                 </a>
             </div>
 
             {/* GRID */}
-            <div className="grid lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10 max-w-7xl mx-auto px-2">
 
                 {(Array.isArray(questions) ? questions : []).map((q: any, index: number) => {
                     const isOpen = opened.includes(q.id);
@@ -96,7 +95,7 @@ useEffect(() => {
                     return (
                         <div
                             key={q.id}
-                            className="w-full h-100 perspective cursor-pointer transition-transform duration-300 hover:scale-105"
+                            className="w-full h-100 perspective cursor-pointer transition-transform duration-300 hover:scale-105 p-1 sm:p-0"
                             onClick={() => {
                                 flipCard(q.id);
                                 setSelectedCard({
@@ -106,10 +105,12 @@ useEffect(() => {
                             }}
                         >
                             <div
-                                className={`relative w-full h-full transform-style-preserve-3d 
-                                duration-[900ms] 
-                                ${isOpen ? "rotate-y-180" : ""}
-                                ease-[cubic-bezier(.68,-0.55,.27,1.55)]
+                                className={`
+                                    relative w-full h-full transform-style-preserve-3d 
+                                    duration-[900ms]
+                                    ${isOpen ? "rotate-y-180 scale-[1.03]" : "scale-100"}
+                                    ease-[cubic-bezier(.68,-0.55,.27,1.55)]
+                                    transition-all
                                 `}
                             >
                                 {/* FRONT */}
@@ -122,9 +123,11 @@ useEffect(() => {
                                         rounded-2xl 
                                         shadow-[0_10px_40px_rgba(0,0,0,0.25)]
                                         flex items-center justify-center 
-                                        text-8xl font-extrabold text-purple-900 drop-shadow-lg
+                                        text-5xl sm:text-7xl lg:text-8xl font-extrabold text-purple-900 drop-shadow-lg
                                         backface-hidden
-                                        transition-all
+                                        transition-all duration-700
+                                        opacity-100
+                                        ${isOpen ? 'opacity-0' : 'opacity-100'}
                                     "
                                 >
                                     {index + 1}
@@ -142,7 +145,8 @@ useEffect(() => {
                                         border border-white/20
                                         backface-hidden 
                                         flex flex-col
-                                        transition-all
+                                        transition-all duration-700
+                                        ${isOpen ? 'opacity-100' : 'opacity-0'}
                                     "
                                 >
                                     <p className="text-2xl font-bold mb-3">
@@ -153,7 +157,7 @@ useEffect(() => {
 
                                         <p
                                             className={`break-words whitespace-pre-line transition-all mt-2
-                                                ${isOpen ? "text-2xl font-bold" : "text-lg"}
+                                                ${isOpen ? "text-xl sm:text-2xl font-bold" : "text-base sm:text-lg"}
                                             `}
                                         >
                                             {q.question}
@@ -169,7 +173,7 @@ useEffect(() => {
 
 
                                         {isAnswerShown && (
-                                            <p className="mt-5 text-yellow-300 text-3xl font-extrabold break-words drop-shadow-md tracking-wide">
+                                            <p className="mt-5 text-yellow-300 text-2xl sm:text-3xl font-extrabold break-words drop-shadow-md tracking-wide">
                                                 Jawaban: {q.answer}
                                             </p>
                                         )}
@@ -195,19 +199,42 @@ useEffect(() => {
             </div>
 
             {selectedCard && (
-                <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 p-6"
+                <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 p-4 sm:p-6"
                         onClick={() => setSelectedCard(null)}>
                     
                     <div
-                        className="bg-white rounded-2xl w-full max-w-3xl p-6 shadow-xl transform scale-100 transition"
+                        className="bg-white rounded-2xl w-full max-w-lg sm:max-w-3xl p-4 sm:p-6 shadow-xl transform scale-100 transition"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <h2 className="text-4xl font-extrabold mb-4 text-purple-700 flex items-center justify-between w-full">
+                        <h2 className="text-2xl sm:text-4xl font-extrabold mb-4 text-purple-700 flex items-center justify-between w-full">
                             <span>Soal:</span>
-                            <span className="text-red-600 text-3xl font-bold">{timer}s</span>
+
+                            <div className="flex items-center gap-3">
+                                <div className="relative w-12 h-12">
+                                <svg className="absolute inset-0 -rotate-90" viewBox="0 0 36 36">
+                                    <path
+                                    className="text-gray-200"
+                                    strokeWidth="4"
+                                    stroke="currentColor"
+                                    fill="none"
+                                    d="M18 2 a 16 16 0 0 1 0 32 a 16 16 0 0 1 0 -32"
+                                    />
+                                    <path
+                                    className="text-red-500 transition-all duration-500"
+                                    strokeWidth="4"
+                                    stroke="currentColor"
+                                    fill="none"
+                                    strokeDasharray="100"
+                                    strokeDashoffset={`${100 - Math.round((timer / (selectedCard?.duration || 1)) * 100)}`}
+                                    d="M18 2 a 16 16 0 0 1 0 32 a 16 16 0 0 1 0 -32"
+                                    />
+                                </svg>
+                                <span className={`absolute inset-0 flex items-center justify-center text-red-600 text-lg font-bold`}>{timer}s</span>
+                                </div>
+                            </div>
                         </h2>
 
-                        <p className="text-2xl whitespace-pre-line mb-4 font-semibold">
+                        <p className="text-lg sm:text-2xl whitespace-pre-line mb-4 font-semibold">
                             {selectedCard.question}
                         </p>
 
@@ -230,7 +257,7 @@ useEffect(() => {
                                 Tampilkan Jawaban
                             </button>
                         ) : (
-                            <p className="text-4xl font-black text-yellow-600 mb-6 drop-shadow-lg tracking-wide">
+                            <p className="text-2xl sm:text-4xl font-black text-red-600 mb-6 tracking-wide">
                                 Jawaban: {selectedCard.answer}
                             </p>
                         )}

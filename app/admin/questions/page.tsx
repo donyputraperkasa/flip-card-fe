@@ -92,8 +92,8 @@ export default function AdminQuestionsPage() {
     /* ------------------------------------------------------------- */
 
     return (
-        <div className="flex flex-col items-center justify-start mb-10 bg-gradient-to-br from-purple-100 to-blue-100 py-10 pb-32">
-            <div className="w-full max-w-4xl">
+        <div className="flex flex-col items-center justify-start mb-10 bg-gradient-to-br from-purple-100 to-blue-100 px-4 py-10 pb-32">
+            <div className="w-full max-w-4xl mx-auto">
                 <AdminHeader />
 
                 <AddQuestion onSubmit={(data) => {
@@ -114,12 +114,12 @@ export default function AdminQuestionsPage() {
                         });
                 }} />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                     {Array.isArray(questions) &&
                         questions.map((q: any, idx: number) => {
                             console.log("Question duration:", q.duration, "for ID:", q.id);
                             return (
-                                <div key={`${q?.id ?? 'q'}-${idx}`}>
+                                <div key={`${q?.id ?? 'q'}-${idx}`} className="p-1 sm:p-0">
                                     <QuestionCard
                                         soal={q.question}
                                         jawaban={q.answer}

@@ -84,7 +84,7 @@ export default function RegisterPage({ onSuccess, onClose, onSwitchToLogin }: { 
                     value={form.email}
                     onChange={handleChange}
                     required
-                    className="w-full border border-gray-700 rounded-lg p-2 focus:outline-purple-500 placeholder:text-gray-400"
+                    className="w-full bg-white border-2 border-purple-400 rounded-lg p-2 focus:border-purple-600 focus:outline-none placeholder:text-gray-500"
                     />
                 </div>
 
@@ -97,7 +97,7 @@ export default function RegisterPage({ onSuccess, onClose, onSwitchToLogin }: { 
                     value={form.password}
                     onChange={handleChange}
                     required
-                    className="w-full border border-gray-700 rounded-lg p-2 focus:outline-purple-500 placeholder:text-gray-400"
+                    className="w-full bg-white border-2 border-purple-400 rounded-lg p-2 focus:border-purple-600 focus:outline-none placeholder:text-gray-500"
                     />
                 </div>
 
@@ -110,14 +110,14 @@ export default function RegisterPage({ onSuccess, onClose, onSwitchToLogin }: { 
                     value={form.confirmPassword}
                     onChange={handleChange}
                     required
-                    className="w-full border border-gray-700 rounded-lg p-2 focus:outline-purple-500 placeholder:text-gray-400"
+                    className="w-full bg-white border-2 border-purple-400 rounded-lg p-2 focus:border-purple-600 focus:outline-none placeholder:text-gray-500"
                     />
                 </div>
 
                 <button
                     type="submit"
                     disabled={loading}
-                    className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg text-lg font-semibold transition"
+                    className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg text-lg font-semibold transition disabled:bg-gray-400 disabled:cursor-not-allowed"
                 >
                     {loading ? "Memproses..." : "Daftar"}
                 </button>

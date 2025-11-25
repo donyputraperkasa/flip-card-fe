@@ -76,7 +76,7 @@ export default function RegisterPage({ onSuccess, onClose, onSwitchToLogin }: { 
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                    <label className="block mb-1 font-semibold text-left">Email</label>
+                    <label className="block mb-1 font-semibold text-left text-purple-700">Email</label>
                     <input
                     type="email"
                     name="email"
@@ -84,12 +84,12 @@ export default function RegisterPage({ onSuccess, onClose, onSwitchToLogin }: { 
                     value={form.email}
                     onChange={handleChange}
                     required
-                    className="w-full border rounded-lg p-2 focus:outline-purple-500"
+                    className="w-full border border-gray-700 rounded-lg p-2 focus:outline-purple-500 placeholder:text-gray-400"
                     />
                 </div>
 
                 <div>
-                    <label className="block mb-1 font-semibold text-left">Password</label>
+                    <label className="block mb-1 font-semibold text-left text-purple-700">Password</label>
                     <input
                     type="password"
                     name="password"
@@ -97,12 +97,12 @@ export default function RegisterPage({ onSuccess, onClose, onSwitchToLogin }: { 
                     value={form.password}
                     onChange={handleChange}
                     required
-                    className="w-full border rounded-lg p-2 focus:outline-purple-500"
+                    className="w-full border border-gray-700 rounded-lg p-2 focus:outline-purple-500 placeholder:text-gray-400"
                     />
                 </div>
 
                 <div>
-                    <label className="block mb-1 font-semibold text-left">Konfirmasi Password</label>
+                    <label className="block mb-1 font-semibold text-left text-purple-700">Konfirmasi Password</label>
                     <input
                     type="password"
                     name="confirmPassword"
@@ -110,7 +110,7 @@ export default function RegisterPage({ onSuccess, onClose, onSwitchToLogin }: { 
                     value={form.confirmPassword}
                     onChange={handleChange}
                     required
-                    className="w-full border rounded-lg p-2 focus:outline-purple-500"
+                    className="w-full border border-gray-700 rounded-lg p-2 focus:outline-purple-500 placeholder:text-gray-400"
                     />
                 </div>
 

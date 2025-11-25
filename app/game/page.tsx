@@ -147,8 +147,7 @@ useEffect(() => {
                                         flex flex-col
                                         transition-all duration-700
                                         ${isOpen ? 'opacity-100' : 'opacity-0'}
-                                    "
-                                >
+                                    ">
                                     <p className="text-2xl font-bold mb-3">
                                         Soal:
                                     </p>
@@ -170,7 +169,6 @@ useEffect(() => {
                                                 alt="gambar soal"
                                             />
                                         )}
-
 
                                         {isAnswerShown && (
                                             <p className="mt-5 text-yellow-300 text-2xl sm:text-3xl font-extrabold break-words drop-shadow-md tracking-wide">

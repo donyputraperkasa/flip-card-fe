@@ -49,26 +49,26 @@ export default function LoginPage({ onSuccess, onClose, onSwitchToRegister }: { 
                 </h2>
 
                     {error && <p className="text-red-500 text-left">{error}</p>}
-                    <label className="block mb-1 font-semibold text-left">Email</label>
+                    <label className="block mb-1 font-semibold text-left text-purple-700">Email</label>
                     <input
                         type="email"
                         placeholder="masukan email mu"
-                        className="border w-full p-2 rounded"
+                        className="w-full border border-gray-700 rounded-lg p-2 focus:outline-purple-500 placeholder:text-gray-400"
                         onChange={(e) => setEmail(e.target.value)}
                     />
 
-                    <label className="block mb-1 font-semibold text-left">Password</label>
+                    <label className="block mb-1 font-semibold text-left text-purple-700">Password</label>
                     <input
                         type="password"
                         placeholder="jangan lupa password-nya"
-                        className="border w-full p-2 rounded"
+                        className="w-full border border-gray-700 rounded-lg p-2 focus:outline-purple-500 placeholder:text-gray-400"
                         onChange={(e) => setPassword(e.target.value)}
                     />
 
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg text-lg font-semibold transitio"
+                        className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg text-lg font-semibold transition disabled:bg-gray-400 disabled:cursor-not-allowed"
                     >
                         {loading ? "Loading..." : "Login"}
                     </button>

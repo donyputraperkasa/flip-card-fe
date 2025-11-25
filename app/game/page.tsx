@@ -232,7 +232,7 @@ useEffect(() => {
                             </div>
                         </h2>
 
-                        <p className="text-lg sm:text-2xl whitespace-pre-line mb-4 font-semibold">
+                        <p className="text-gray-900 text-lg sm:text-2xl whitespace-pre-line mb-4 font-semibold">
                             {selectedCard.question}
                         </p>
 

@@ -84,7 +84,7 @@ export default function RegisterPage({ onSuccess, onClose, onSwitchToLogin }: { 
                     value={form.email}
                     onChange={handleChange}
                     required
-                    className="w-full bg-white border-2 border-purple-400 rounded-lg p-2 focus:border-purple-600 focus:outline-none placeholder:text-gray-500"
+                    className="w-full bg-white text-gray-700 border-2 border-purple-400 rounded-lg p-2 focus:border-purple-600 focus:outline-none placeholder:text-gray-500"
                     />
                 </div>
 
@@ -97,7 +97,7 @@ export default function RegisterPage({ onSuccess, onClose, onSwitchToLogin }: { 
                     value={form.password}
                     onChange={handleChange}
                     required
-                    className="w-full bg-white border-2 border-purple-400 rounded-lg p-2 focus:border-purple-600 focus:outline-none placeholder:text-gray-500"
+                    className="w-full bg-white text-gray-700 border-2 border-purple-400 rounded-lg p-2 focus:border-purple-600 focus:outline-none placeholder:text-gray-500"
                     />
                 </div>
 
@@ -110,7 +110,7 @@ export default function RegisterPage({ onSuccess, onClose, onSwitchToLogin }: { 
                     value={form.confirmPassword}
                     onChange={handleChange}
                     required
-                    className="w-full bg-white border-2 border-purple-400 rounded-lg p-2 focus:border-purple-600 focus:outline-none placeholder:text-gray-500"
+                    className="w-full bg-white text-gray-700 border-2 border-purple-400 rounded-lg p-2 focus:border-purple-600 focus:outline-none placeholder:text-gray-500"
                     />
                 </div>
 

@@ -53,7 +53,7 @@ export default function LoginPage({ onSuccess, onClose, onSwitchToRegister }: { 
                     <input
                         type="email"
                         placeholder="masukan email mu"
-                        className="w-full bg-white border-2 border-purple-400 rounded-lg p-2 focus:border-purple-600 focus:outline-none placeholder:text-gray-500"
+                        className="w-full bg-white text-gray-700 border-2 border-purple-400 rounded-lg p-2 focus:border-purple-600 focus:outline-none placeholder:text-gray-500"
                         onChange={(e) => setEmail(e.target.value)}
                     />
 
@@ -61,7 +61,7 @@ export default function LoginPage({ onSuccess, onClose, onSwitchToRegister }: { 
                     <input
                         type="password"
                         placeholder="jangan lupa password-nya"
-                        className="w-full bg-white border-2 border-purple-400 rounded-lg p-2 focus:border-purple-600 focus:outline-none placeholder:text-gray-500"
+                        className="w-full bg-white text-gray-700 border-2 border-purple-400 rounded-lg p-2 focus:border-purple-600 focus:outline-none placeholder:text-gray-500"
                         onChange={(e) => setPassword(e.target.value)}
                     />
 

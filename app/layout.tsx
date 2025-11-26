@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
 import Footer from "@/component/Footer";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,7 +31,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div className="min-h-screen flex flex-col relative">
-          <main className="flex-1">{children}</main>
+          <main className="flex-1">
+            {children}
+            <SpeedInsights />
+          </main>
 
           {/* Footer fixed */}
           <div className="w-full fixed bottom-0 left-0">

@@ -28,12 +28,14 @@ export default function RegisterPage({ onSuccess, onClose, onSwitchToLogin }: { 
         try {
         setLoading(true);
 
-        const response = await fetch("http://localhost:3000/auth/register", {
+        const API = process.env.NEXT_PUBLIC_API_URL;
+
+        const response = await fetch(`${API}/auth/register`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-            email: form.email,
-            password: form.password,
+                email: form.email,
+                password: form.password,
             }),
         });
 

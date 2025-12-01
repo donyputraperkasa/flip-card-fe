@@ -69,7 +69,7 @@ export default function EditQuestionModal({
                     type="text"
                     value={soal ?? ""}
                     onChange={(e) => setSoal(e.target.value)}
-                    className="border border-purple-300 p-3 w-full mb-4 rounded-lg focus:ring-2 focus:ring-purple-400 outline-none transition"
+                    className="border border-purple-300 p-3 w-full mb-4 rounded-lg focus:ring-2 focus:ring-purple-400 outline-none transition text-gray-700"
                     placeholder="Edit soal"
                 />
 
@@ -77,7 +77,7 @@ export default function EditQuestionModal({
                     type="text"
                     value={jawaban ?? ""}
                     onChange={(e) => setJawaban(e.target.value)}
-                    className="border border-purple-300 p-3 w-full mb-4 rounded-lg focus:ring-2 focus:ring-purple-400 outline-none transition"
+                    className="border border-purple-300 p-3 w-full mb-4 rounded-lg focus:ring-2 focus:ring-purple-400 outline-none transition text-gray-700"
                     placeholder="Edit jawaban"
                 />
 
@@ -85,7 +85,7 @@ export default function EditQuestionModal({
                     type="file"
                     accept="image/*"
                     onChange={(e) => setGambar(e.target.files?.[0] || null)}
-                    className="border border-purple-300 p-3 w-full mb-4 rounded-lg focus:ring-2 focus:ring-purple-400 outline-none transition"
+                    className="border border-purple-300 p-3 w-full mb-4 rounded-lg focus:ring-2 focus:ring-purple-400 outline-none transition text-gray-700"
                 />
 
                 {/* INPUT DURASI */}
@@ -95,7 +95,7 @@ export default function EditQuestionModal({
                     onChange={(e) => setDuration(Number(e.target.value))}
                     placeholder="Durasi (detik)"
                     className="border border-purple-300 p-3 w-full mb-4 rounded-lg 
-                        focus:ring-2 focus:ring-purple-400 outline-none transition"
+                        focus:ring-2 focus:ring-purple-400 outline-none transition text-gray-700"
                 />
 
                 <div className="flex justify-end gap-3 mt-4">

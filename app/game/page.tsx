@@ -165,7 +165,7 @@ useEffect(() => {
                                         {q.imageUrl && (
                                             <img
                                                 src={`${API}/uploads/${q.imageUrl}`}
-                                                className="w-full max-h-32 object-contain rounded-lg shadow mx-auto"
+                                                className="w-full max-h-32 object-contain rounded-lg shadow mx-auto bg-white"
                                                 alt="gambar soal"
                                             />
                                         )}
